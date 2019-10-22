@@ -72,7 +72,7 @@ if ($show_ip != 0) {
 }
 
 ImagePng($image);
-// ImageDestroy($image);
+ImageDestroy($image);
 
 function utf8str($str) {
     # 偵測引入字串的編碼
