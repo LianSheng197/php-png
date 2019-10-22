@@ -2,7 +2,10 @@
 Header("Content-type: image/png");
 date_default_timezone_set("Asia/Taipei");
 
-$ttf = "ttf/WenQuanYiZenHeiMono-02.ttf";
+// for localhost
+// $ttf = $_SERVER["DOCUMENT_ROOT"] . "/app/ttf/WenQuanYiZenHeiMono-02.ttf";
+// for heroku
+$ttf = $_SERVER["DOCUMENT_ROOT"] . "/app/ttf/WenQuanYiZenHeiMono-02.ttf";
 $demo_string = "
 這是一張實際上不存在的圖片。|
 它由 php 函數 ImagePng() 產生，|
