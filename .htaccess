@@ -1,18 +1,15 @@
-## Force SSL 
+RewriteEngine On
 
+## Force SSL 
 # Normal way (in case you need to deploy to NON-heroku)
 RewriteCond %{HTTPS} !=on
-
 # Heroku way
 RewriteCond %{HTTP:X-Forwarded-Proto} !https 
 
 AddType application/x-httpd-php .png
-
-<FilesMatch "\.php$">
+<FilesMatch "\.png$">
     SetHandler application/x-httpd-php
 </FilesMatch>
 
-RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
-
 RewriteRule ^ index.php [QSA,L]
