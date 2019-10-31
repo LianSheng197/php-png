@@ -6,10 +6,7 @@ RewriteCond %{HTTPS} !=on
 # Heroku way
 RewriteCond %{HTTP:X-Forwarded-Proto} !https 
 
-# AddType application/x-httpd-php .png
-# <FilesMatch "\.png$">
-#     SetHandler application/x-httpd-php
-# </FilesMatch>
+AddType application/x-httpd-php .png
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule index.png index.php [QSA,L]
+RewriteRule ^(.*)$ index.php [QSA,L]
