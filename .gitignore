@@ -1,3 +1,2 @@
-.vscode/
-debug.*
-*.tmp
+# 因爲是直接連結至 heroku，因此不可將 vender/* 忽略，否則將部署失敗。
+.vscode/*
