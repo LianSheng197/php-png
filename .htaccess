@@ -11,5 +11,5 @@ RewriteCond %{HTTP:X-Forwarded-Proto} !https
 #     SetHandler application/x-httpd-php
 # </FilesMatch>
 
-# RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule index.png index.php [QSA,L]
