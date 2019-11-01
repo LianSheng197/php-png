@@ -1,13 +1,15 @@
 RewriteEngine On
 RewriteBase /
 
-## Force SSL 
-# Normal way (in case you need to deploy to NON-heroku)
- RewriteCond %{HTTPS} !=on
-# Heroku way
-RewriteCond %{HTTP:X-Forwarded-Proto} !https 
-
 AddType application/x-httpd-php .png
 
+## Force SSL 
+# Heroku way (https)
+RewriteCond %{HTTP:X-Forwarded-Proto} https 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ index.php [QSA,L,R=302]
+RewriteRule ^(.*)$ index.php [L,QSA]
+
+# http
+RewriteCond %{HTTP:X-Forwarded-Proto} !https 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [L,QSA]
