@@ -17,15 +17,14 @@ $demo_string = "
     bc: 背景顏色|
     fc: 字體顏色|
 |
-＊使用字體：文泉驛等寬正黑|
-（謎之音：但是看起來有些地方不夠等寬= =\"?）
+＊使用字體：文泉驛等寬正黑
 ";
 
 $text = isset($_GET['s']) ? $_GET['s'] : $demo_string;
 $item_text = explode("|", $text);
 $size = isset($_GET['size']) ? $_GET['size'] : 14;
 $width = isset($_GET['w']) ? $_GET['w'] : 600;
-$height = isset($_GET['h']) ? $_GET['h'] : 430;
+$height = isset($_GET['h']) ? $_GET['h'] : 410;
 $bc = isset($_GET['bc']) ? $_GET['bc'] : "333";
 $bgcolor = explode(",", hex2rgb($bc));
 $fc = isset($_GET['fc']) ? $_GET['fc'] : "CCC";
