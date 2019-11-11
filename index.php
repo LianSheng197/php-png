@@ -6,22 +6,15 @@ $ttf = $_SERVER["DOCUMENT_ROOT"] . "/ttf/WenQuanYiZenHeiMono-02.ttf";
 $demo_string = "
 這是一張實際上不存在的圖片。|
 它由 php 函數 ImagePng() 產生，|
-再用 ImageTTFText() 插入文字的。|
-|
-下列是目前支援的參數設定：|
-     s: 圖片嵌入文字，以豎線 (Vertical bar) 作爲換行符號|
-        （一般豎線是放在 ENTER 鍵附近）|
-     w: 圖片寬度|
-     h: 圖片高度|
-  size: 字體大小|
-    bc: 背景顏色|
-    fc: 字體顏色|
-|
-＊使用字體：文泉驛等寬正黑
+再用 ImageTTFText() 插入文字的。||
+只需要將文字打在網址末端即可產生圖片。|
+若需換行則打上豎線 (\|)||
+＊使用字體：文泉驛等寬正黑|
+＊原始碼：在任何狀況時，於網址末端打上 \"/code\" 即可自動導向。
 ";
 
 $text = isset($_GET['s']) ? $_GET['s'] : $demo_string;
-$item_text = explode("|", $text);
+$item_text = preg_split("/(?<!\\\\)\|/", $text);
 $size = isset($_GET['size']) ? $_GET['size'] : 14;
 $width = isset($_GET['w']) ? $_GET['w'] : 600;
 $height = isset($_GET['h']) ? $_GET['h'] : 410;
@@ -31,8 +24,7 @@ $fc = isset($_GET['fc']) ? $_GET['fc'] : "CCC";
 $fontcolor = explode(",", hex2rgb($fc));
 
 /* -------- Special Parameter -------- */
-// 不檢查高度（設定爲 true，未設定爲 false）
-isset($_GET['nohck']) ? $height_chack = false : $height_chack = true; 
+$height_chack = true; 
 // 顯示 IP，格式："ip=<pos_x>,<pos_y>,[size],[fontcolor]"
 $show_ip = isset($_GET['ip']) ? $_GET['ip'] : 0; 
 
@@ -48,7 +40,7 @@ for ($i = 0; $i < sizeof($item_text); $i++) {
     if ($height_chack && $pos_y >= $height - $size) {
         break;
     }
-    $line = utf8str($item_text[$i]);
+    $line = utf8str(str_replace("\|", "|", $item_text[$i]));
 
     # 插入文字
     ImageTTFText($image, $size, $angle, $pos_x, $pos_y, $color, $ttf, $line);
@@ -126,10 +118,4 @@ function getIP()
     }
 
     return ($ip == "::1") ? "127.0.0.1" : $ip;
-}
-
-// debug
-function debug(...$data)
-{
-    error_log("[" . date("Y-m-d H:i:s") . "]\n" . json_encode($data) . "\n", 3, "./debug.log");
 }
