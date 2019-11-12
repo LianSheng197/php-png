@@ -15,22 +15,34 @@ $demo_string = "
 
 $text = isset($_GET['s']) ? $_GET['s'] : $demo_string;
 $item_text = preg_split("/(?<!\\\\)\|/", $text);
-$size = isset($_GET['size']) ? $_GET['size'] : 14;
-$width = isset($_GET['w']) ? $_GET['w'] : 600;
-$height = isset($_GET['h']) ? $_GET['h'] : 410;
+$size = 14;
 $bc = isset($_GET['bc']) ? $_GET['bc'] : "333";
 $bgcolor = explode(",", hex2rgb($bc));
 $fc = isset($_GET['fc']) ? $_GET['fc'] : "CCC";
 $fontcolor = explode(",", hex2rgb($fc));
 
 /* -------- Special Parameter -------- */
-$height_chack = true; 
+$height_chack = true;
 // 顯示 IP，格式："ip=<pos_x>,<pos_y>,[size],[fontcolor]"
-$show_ip = isset($_GET['ip']) ? $_GET['ip'] : 0; 
+$show_ip = isset($_GET['ip']) ? $_GET['ip'] : 0;
 
 $angle = 0;
 $pos_x = 6;
 $pos_y = 6 + $size;
+
+// calc height by word lines.
+$height = ($size + 1) * count($item_text) * 2 + 6;
+
+// calc width by the longest lines. (have some difference, may caused by fonts.)
+$longest = ($size + 1) * 2;
+foreach ($item_text as $line) {
+    $length = mb_strwidth($line, "UTF-8") * $size * 0.75 + 6;
+    if ($length > $longest) {
+        $longest = $length;
+    }
+}
+$width = $longest;
+
 $image = imagecreate($width, $height);
 $bgcolor = ImageColorAllocate($image, $bgcolor[0], $bgcolor[1], $bgcolor[2]);
 $color = ImageColorAllocate($image, $fontcolor[0], $fontcolor[1], $fontcolor[2]);
@@ -48,24 +60,11 @@ for ($i = 0; $i < sizeof($item_text); $i++) {
     $pos_y += $size * 2;
 }
 
-// 特殊：顯示訪客的 IP
-if ($show_ip != 0) {
-    $pos = explode(",", $show_ip);
-    $px = $pos[0];
-    $py = $pos[1];
-    $ip_size = isset($pos[2])? $pos[2] : $size;
-    $ip_color_pre = isset($pos[3])? explode(",", hex2rgb($pos[3])) : explode(",", hex2rgb("CCC"));
-    $ip_color = ImageColorAllocate($image, $ip_color_pre[0], $ip_color_pre[1], $ip_color_pre[2]);
-    $ip = getIP();
-
-    utf8str($ip);
-    ImageTTFText($image, $ip_size, $angle, $px, $py, $ip_color, $ttf, $ip);
-}
-
 ImagePng($image);
 ImageDestroy($image);
 
-function utf8str($str) {
+function utf8str($str)
+{
     # 偵測引入字串的編碼
     $text_encoding = mb_detect_encoding($str, 'UTF-8, ISO-8859-1');
     # 確保最後結果是以 UTF-8 編碼
@@ -105,17 +104,4 @@ function hex2rgb($hex)
 
     $rgb = array($r, $g, $b);
     return implode(",", $rgb);
-}
-
-function getIP()
-{
-    if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
-        $ip = $_SERVER["HTTP_CLIENT_IP"];
-    } elseif (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
-        $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
-    } else {
-        $ip = $_SERVER["REMOTE_ADDR"];
-    }
-
-    return ($ip == "::1") ? "127.0.0.1" : $ip;
 }
