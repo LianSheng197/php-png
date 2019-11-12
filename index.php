@@ -4,13 +4,13 @@ date_default_timezone_set("Asia/Taipei");
 
 $ttf = $_SERVER["DOCUMENT_ROOT"] . "/ttf/WenQuanYiZenHeiMono-02.ttf";
 $demo_string = "
-這是一張實際上不存在的圖片。|
-它由 php 函數 ImagePng() 產生，|
-再用 ImageTTFText() 插入文字的。||
-只需要將文字打在網址末端即可產生圖片。|
-若需換行則打上豎線 (\|)||
+這是一張實際上不存在的圖片。||
+只需要將文字打在網址末端即可產生塞有對應文字的圖片，如需換行則打上豎線 (\|)|
+舉個栗子：https://php-png.herokuapp.com/Line 1\|Line 2\|Line 3||
 ＊使用字體：文泉驛等寬正黑|
-＊原始碼：在任何狀況時，於網址末端打上 \"/code\" 即可自動導向。
+＊這是怎麽做的？|
+  參考原始碼：在任何狀況時，於網址末端打上 \"/code\" 即可自動導向。|
+  Ex: https://php-png.herokuapp.com/....../code
 ";
 
 $text = isset($_GET['s']) ? $_GET['s'] : $demo_string;
