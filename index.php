@@ -15,7 +15,7 @@ $demo_string = "
 ＊使用字體：文泉驛等寬正黑|
 ＊這是怎麽做的？|
   參考原始碼：在任何狀況時，於網址末端打上 \"/code\" 即可自動導向。|
-  Ex: https://php-png.herokuapp.com/xxxxxxxxx/code
+  Ex: https://php-png.herokuapp.com/xxx.../code
 ";
 
 $text = isset($_GET['s']) ? $_GET['s'] : $demo_string;
