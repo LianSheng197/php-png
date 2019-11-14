@@ -14,7 +14,7 @@ $ttf = $_SERVER["DOCUMENT_ROOT"] . "/ttf/WenQuanYiZenHeiMono-02.ttf";
 $dnt_open = getDNT();
 $ref = getRef();
 
-if ($dnt_open) {
+if (!$dnt_open) {
     $text = "你的瀏覽器告訴我...|噢不！你似乎開啓了「不要追蹤我」的選項。|那只好尊重你的選擇了。|（放心，這張圖不會存入任何資料。）";
 } else {
     $ip = getIP();
