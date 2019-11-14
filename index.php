@@ -2,17 +2,20 @@
 require($_SERVER["DOCUMENT_ROOT"] . "/func/main.php");
 
 Header("Content-type: image/png");
+Header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+Header("Cache-Control: post-check=0, pre-check=0", false);
+Header("Pragma: no-cache");
 date_default_timezone_set("Asia/Taipei");
 
 $ttf = $_SERVER["DOCUMENT_ROOT"] . "/ttf/WenQuanYiZenHeiMono-02.ttf";
 $demo_string = "
 這是一張實際上不存在的圖片。||
-只需要將文字打在網址末端即可產生塞有對應文字的圖片，如需換行則打上豎線 (\|)|
+只需要將文字打在網址末端即可產生塞有對應文字的圖片，如需換行則打上豎線 \"\|\"|
 舉個栗子：https://php-png.herokuapp.com/Line 1\|Line 2\|Line 3||
 ＊使用字體：文泉驛等寬正黑|
 ＊這是怎麽做的？|
   參考原始碼：在任何狀況時，於網址末端打上 \"/code\" 即可自動導向。|
-  Ex: https://php-png.herokuapp.com/....../code
+  Ex: https://php-png.herokuapp.com/xxxxxxxxx/code
 ";
 
 $text = isset($_GET['s']) ? $_GET['s'] : $demo_string;
