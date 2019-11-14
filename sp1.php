@@ -1,5 +1,5 @@
 <?php
-// Special-01: 600x125, sign. get visitor's referer url and title.
+// Special-01: 600x125, sign. get visitor's IP.
 require $_SERVER["DOCUMENT_ROOT"] . "/func/main.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/func/special.php";
 
@@ -14,15 +14,11 @@ $ttf = $_SERVER["DOCUMENT_ROOT"] . "/ttf/WenQuanYiZenHeiMono-02.ttf";
 $dnt_open = getDNT();
 $ref = getRef();
 
-if ($dnt_open) {
+if (!$dnt_open) {
     $text = "你的瀏覽器告訴我...|噢不！你似乎開啓了「不要追蹤我」的選項。|那只好尊重你的選擇了。|（放心，這張圖不會存入任何資料。）";
 } else {
-    if ($ref != "Error_No_Referer") {
-        $title = getTitle($ref);
-        $text = "你似乎正在瀏覽「${title}」...？|($ref)";
-    } else {
-        $text = "你似乎開了新分頁看著這張圖...？|或者你的瀏覽器不支援此功能。";
-    }
+    $ip = getIP();
+    $text = "你的瀏覽器告訴我...|這是你的 IP 嗎？|>> ($ip)";
 }
 
 $item_text = preg_split("/(?<!\\\\)\|/", $text);
