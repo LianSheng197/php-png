@@ -1,5 +1,5 @@
 <?php
-// Special-01: 660x125, sign. get visitor's IP.
+// Special-02: 690x250, homeBG, get visitor's ref and title.
 require $_SERVER["DOCUMENT_ROOT"] . "/func/main.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/func/special.php";
 
@@ -32,8 +32,8 @@ $angle = 0;
 $pos_x = 6;
 $pos_y = 6 + $size;
 
-$width = 660;
-$height = 125;
+$width = 690;
+$height = 250;
 
 $image = imagecreate($width, $height);
 $bgcolor = ImageColorAllocate($image, $bgcolor[0], $bgcolor[1], $bgcolor[2]);

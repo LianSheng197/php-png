@@ -4,6 +4,9 @@ RewriteBase /
 # redirect to source code
 RewriteRule ^(.+)\/code$ https://github.com/LianSheng197/php-png [L,R=307]
 
+# for special
+RewriteRule ^special\/(sp.)\.png$ $1.php [L]
+
 # https
 RewriteCond %{HTTP:X-Forwarded-Proto} https 
 RewriteCond %{REQUEST_FILENAME} !-f
