@@ -1,4 +1,11 @@
 <?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+date_default_timezone_set("Asia/Taipei");
+
+$ttf = $_SERVER["DOCUMENT_ROOT"] . "/ttf/WenQuanYiZenHeiMono-02.ttf";
+
 function utf8str($str)
 {
     # 偵測引入字串的編碼

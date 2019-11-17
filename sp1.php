@@ -4,12 +4,6 @@ require $_SERVER["DOCUMENT_ROOT"] . "/func/main.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/func/special.php";
 
 Header("Content-type: image/png");
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-date_default_timezone_set("Asia/Taipei");
-
-$ttf = $_SERVER["DOCUMENT_ROOT"] . "/ttf/WenQuanYiZenHeiMono-02.ttf";
 
 $dnt_open = getDNT();
 $ref = getRef();

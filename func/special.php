@@ -22,7 +22,7 @@ function getRef()
     if (isset($_SERVER["HTTP_REFERER"])) {
         $result = $_SERVER["HTTP_REFERER"];
     } else {
-        $result = "Error_No_Referer";
+        $result = false;
     }
 
     return $result;

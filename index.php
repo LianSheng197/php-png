@@ -2,12 +2,7 @@
 require($_SERVER["DOCUMENT_ROOT"] . "/func/main.php");
 
 Header("Content-type: image/png");
-Header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-Header("Cache-Control: post-check=0, pre-check=0", false);
-Header("Pragma: no-cache");
-date_default_timezone_set("Asia/Taipei");
 
-$ttf = $_SERVER["DOCUMENT_ROOT"] . "/ttf/WenQuanYiZenHeiMono-02.ttf";
 $demo_string = "
 這是一張實際上不存在的圖片。||
 只需要將文字打在網址末端即可產生塞有對應文字的圖片，如需換行則打上豎線 \"\|\"|
