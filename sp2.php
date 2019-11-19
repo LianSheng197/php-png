@@ -5,17 +5,22 @@ require $_SERVER["DOCUMENT_ROOT"] . "/func/special.php";
 
 Header("Content-type: image/png");
 
-
 $dnt_open = getDNT();
 $ref = getRef();
 
 if ($dnt_open) {
     $text = "你的瀏覽器告訴我...|噢不！你似乎開啓了「不要追蹤我」的選項。|那只好尊重你的選擇了。|（放心，這張圖不會存入任何資料。）";
 } else {
-    if (getRef()) {
-        $text = "";
+    $ref = getRef();
+    if ($ref) {
+        if(strstr($ref, "p2.bahamut.com.tw")){
+            $text = "你似乎正在我的小屋裡看這張圖...？";
+        } else {
+            $title = getTitle($ref);
+            $text = "你的瀏覽器告訴我...|你來自於 $title | ($ref)";
+        }
     } else {
-        $text = "";
+        $text = "你的瀏覽器告訴我...|";
     }
 
 }
