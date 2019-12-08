@@ -1,7 +1,4 @@
 <?php
-
-use BrowscapPHP\Formatter\PhpGetBrowser;
-
 function getDNT()
 {
     return (isset($_SERVER['HTTP_DNT']) && $_SERVER['HTTP_DNT'] == 1);
@@ -42,12 +39,3 @@ function getTitle(string $url)
         return $title[1];
     }
 }
-
-function getMisc()
-{
-    $browser_all = get_browser(null, true);
-    echo $browser = $browser_all["browser"];
-    echo $os = $browser_all["platform"];
-}
-
-getMisc();
