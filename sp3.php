@@ -1,5 +1,5 @@
 <?php
-// Special-03: 800x600, c-haner points line graph (suspend)
+// Special-03: 800x600, c-haner points line graph
 require $_SERVER["DOCUMENT_ROOT"] . "/func/main.php";
 require $_SERVER["DOCUMENT_ROOT"] . "/func/special.php";
 
@@ -17,17 +17,13 @@ $padding_x = 40;
 $padding_y = 40;
 
 
-$x = $padding_x;
+$x = 21;
 $y = 11;
 $num = 0;
 while ($x <= $width && $y <= $height) {
     $prcnt = ((($height - 50) - ($y - 1)) / ($height - 60)) * 100;
-
-    // x-grid
+    imageline($im, 21, $y, $width - 10, $y, $gray);
     imageline($im, $x, 11, $x, $height - 50, $gray);
-    // y-grid
-    imageline($im, $padding_x, $y, $width - 10, $y, $gray);
-
 
     // imagestring($im, 2, 1, $y - 10, $prcnt . '%', $red);
     imagestring($im, 2, $x - 3, $height - 40, $num, $red);
