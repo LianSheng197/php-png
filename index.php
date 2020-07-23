@@ -1,5 +1,6 @@
 <?php
 require($_SERVER["DOCUMENT_ROOT"] . "/func/main.php");
+require($_SERVER["DOCUMENT_ROOT"] . "/log.php");
 
 Header("Content-type: image/png");
 
